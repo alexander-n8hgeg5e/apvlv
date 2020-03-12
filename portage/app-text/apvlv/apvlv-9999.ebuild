@@ -23,6 +23,8 @@ DEPEND="
 	dev-libs/glib:2
 	x11-libs/gtk+:3
 	djvu? ( app-text/djvu:= )
+	app-text/ebook-tools
+	net-libs/webkit-gtk
 "
 RDEPEND="${DEPEND}"
 

@@ -32,6 +32,11 @@
 
 #include <epub.h>
 #include <gtk/gtk.h>
+
+#ifdef APVLV_WITH_WEBKIT
+#include <webkit2/webkit2.h>
+#endif
+
 #include <libxml/parser.h>
 
 #include <map>
@@ -52,8 +57,9 @@ namespace apvlv
 
     bool pagetext (int, int, int, int, int, char **);
 
+#ifdef APVLV_WITH_WEBKIT
     bool renderweb (int pn, int ix, int iy, double zm, int rot, GtkWidget *widget);
-
+#endif
     ApvlvPoses *pagesearch (int pn, const char *str, bool reverse =
 			    false);
 

@@ -34,7 +34,10 @@
 #include "ApvlvUtil.h"
 
 #include <gtk/gtk.h>
+
+#ifdef APVLV_WITH_WEBKIT
 #include <webkit2/webkit2.h>
+#endif
 
 #include <iostream>
 #include <vector>
@@ -213,6 +216,7 @@ namespace apvlv
 
     void srtranslate(int &rtimes, double &sr, bool single2continuous);
 
+#ifdef APVLV_WITH_WEBKIT
     static void webview_resource_load_started_cb (WebKitWebView *web_view,
                                                   WebKitWebResource *resource,
                                                   WebKitURIRequest *request,
@@ -225,6 +229,7 @@ namespace apvlv
                                              GdkEvent            *event,
                                              WebKitHitTestResult *hit_test_result,
                                              ApvlvDoc *doc);
+#endif
 
   private:
     void blank (int x, int y);

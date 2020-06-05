@@ -13,7 +13,7 @@ EGIT_REPO_URI="${CODEDIR}/apvlv https://github.com/alexander-n8hgeg5e/apvlv.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="debug djvu"
+IUSE="debug djvu webkit"
 
 BDEPEND="
 	virtual/pkgconfig
@@ -24,7 +24,7 @@ DEPEND="
 	x11-libs/gtk+:3
 	djvu? ( app-text/djvu:= )
 	app-text/ebook-tools
-	net-libs/webkit-gtk
+	webkit? ( net-libs/webkit-gtk )
 "
 RDEPEND="${DEPEND}"
 
@@ -34,6 +34,7 @@ src_configure() {
 		-DDOCDIR=${EPREFIX}/usr/share/${PN}
 		-DMANDIR=${EPREFIX}/usr/share/man
 		-DAPVLV_WITH_HTML=OFF
+		-DAPVLV_WITH_WEBKIT=$(usex webkit)
 		-DAPVLV_WITH_UMD=OFF
 		-DAPVLV_WITH_TXT=ON
 		-DAPVLV_WITH_DJVU=$(usex djvu)

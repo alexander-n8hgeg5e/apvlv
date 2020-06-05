@@ -31,7 +31,10 @@
 #include "ApvlvFile.h"
 
 #include <gtk/gtk.h>
+
+#ifdef APVLV_WITH_WEBKIT
 #include <webkit2/webkit2.h>
+#endif
 
 namespace apvlv
 {
@@ -52,9 +55,9 @@ namespace apvlv
     int pagesum ();
 
     bool pagetext (int, int, int, int, int, char **);
-
+#ifdef APVLV_WITH_WEBKIT
     bool renderweb (int pn, int ix, int iy, double zm, int rot, GtkWidget *widget);
-
+#endif
     ApvlvPoses *pagesearch (int pn, const char *str, bool reverse = false);
 
     bool pageselectsearch (int, int, int, double, int,

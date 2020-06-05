@@ -35,7 +35,6 @@
 #include "epub.h"
 
 #include <gdk/gdkkeysyms.h>
-#include <webkit2/webkit2.h>
 #include <libxml/parser.h>
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
@@ -212,6 +211,7 @@ namespace apvlv
     return false;
   }
 
+#ifdef APVLV_WITH_WEBKIT
   bool ApvlvEPUB::renderweb (int pn, int ix, int iy, double zm, int rot, GtkWidget *widget)
   {
     webkit_web_view_set_zoom_level (WEBKIT_WEB_VIEW (widget), zm);
@@ -236,6 +236,7 @@ namespace apvlv
     
     return true;
   }
+#endif
 
   ApvlvPoses *ApvlvEPUB::pagesearch (int pn, const char *str, bool reverse)
   {

@@ -34,7 +34,6 @@
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include <webkit2/webkit2.h>
 
 #include <cstdlib>
 #include <cmath>
@@ -136,6 +135,7 @@ namespace apvlv
             gtk_box_pack_start (GTK_BOX (vbox), mImg3, TRUE, TRUE, 0);
           }
       }
+#ifdef APVLV_WITH_WEBKIT
     else if (type == 1)
       {
         mWeb1 = webkit_web_view_new ();
@@ -147,6 +147,7 @@ namespace apvlv
         g_signal_connect (mWeb1, "context-menu",
                           G_CALLBACK (webview_context_menu_cb), this);
       }
+#endif
 
     g_signal_connect (G_OBJECT (mVaj), "value-changed",
 		      G_CALLBACK (apvlv_doc_on_mouse), this);
@@ -1417,9 +1418,11 @@ namespace apvlv
       return;
 
     gchar *javasrc = g_strdup_printf("window.scrollBy(%d, %d);", times * h, times * v);
+#ifdef APVLV_WITH_WEBKIT
     webkit_web_view_run_javascript (WEBKIT_WEB_VIEW (mWeb1),
                                     javasrc,
                                     nullptr, nullptr, this);
+#endif
     g_free (javasrc);
   }
 
@@ -1429,9 +1432,11 @@ namespace apvlv
       return;
 
     gchar *javasrc = g_strdup_printf("window.scroll(window.screenX * %f, window.screenY * %f);", xrate, yrate);
+#ifdef APVLV_WITH_WEBKIT
     webkit_web_view_run_javascript (WEBKIT_WEB_VIEW (mWeb1),
                                     javasrc,
                                     nullptr, nullptr, this);
+#endif
     g_free (javasrc);
   }
 
@@ -1875,6 +1880,7 @@ namespace apvlv
     doc->blank (rx, ry);
   }
 
+#ifdef APVLV_WITH_WEBKIT
   void
   ApvlvDoc::webview_resource_load_started_cb (WebKitWebView *web_view,
                                               WebKitWebResource *resource,
@@ -1913,6 +1919,7 @@ namespace apvlv
   {
     return TRUE;
   }
+#endif
 
   void
   ApvlvDoc::eventpos (double x, double y, double *rx, double *ry)
